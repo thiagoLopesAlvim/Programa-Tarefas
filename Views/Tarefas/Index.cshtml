@@ -1,0 +1,119 @@
+﻿@model IEnumerable<programa_consultorio.Models.Tarefas>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="d:\c#\programa-consultorio - copia\scripts\jquery-ui-1.13.2.custom\jquery-ui.js"></script>
+<script src="d:\c#\programa-consultorio - copia\scripts\jquery-ui-1.13.2.custom\jquery-ui.min.js"></script>
+<script src="d:\c#\programa-consultorio - copia\scripts\jquerry\jquery-3.6.1.min.js"></script>
+
+
+<style>
+    #sortable tr:hover{
+        background-color:blue;
+    }
+</style>
+<head>
+</head>
+<h1>Trefas</h1>
+<table class="table" id="tbla" >
+    
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.id_tarefa)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.nome_tarefa)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.custo_tarefa)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.data_limite)
+            </th>
+            
+            <th></th>
+        </tr>
+    </thead>
+    
+    <tbody style="cursor:pointer" id="tblLaBody">
+@foreach (var item in Model) {
+                
+                @if(item.custo_tarefa >= 1000){
+
+                            <tr bgcolor="#FFFF00">
+                                        <td>
+                                                    <button href="#" class="up"  asp-action="MoveUP" asp-route-id="@item.id_tarefa" >Up</button>
+                                                    <button href="#" class="down" asp-action="MoveDOWN" asp-route-id="@item.id_tarefa" >Down</button>
+                                        </td>
+                                <td>
+                        @Html.DisplayFor(modelItem => item.id_tarefa)
+                                </td>
+                               <td class="taskSingleInline">
+                        @Html.DisplayFor(modelItem => item.nome_tarefa)
+                               </td>
+                                <td>
+                        @Html.DisplayFor(modelItem => item.custo_tarefa)
+                                </td>
+                                <td>
+                        @Html.DisplayFor(modelItem => item.data_limite)
+                                </td>
+                            <td>
+                                    <a asp-action="Edit" asp-route-id="@item.id_tarefa" class="btn btn-danger">Editar</a> |
+                                    <a asp-action="Details" asp-route-id="@item.id_tarefa" class="btn btn-danger">Detalhar</a> |
+                                    <a asp-action="Delete" asp-route-id="@item.id_tarefa" class="btn btn-danger">Deletar</a>
+
+                            </td>
+                        </tr>
+                }else{
+                <tr> 
+                         <td>
+                                                <button href="#" class="up" asp-action="MoveUP" asp-route-id="@item.id_tarefa" >Up</button>
+                                                <button href="#" class="down" asp-action="MoveDOWN" asp-route-id="@item.id_tarefa" >Down</button>
+                         </td>
+                        <td>
+                        @Html.DisplayFor(modelItem => item.id_tarefa)
+                        </td>
+                       <td>
+                        @Html.DisplayFor(modelItem => item.nome_tarefa)
+                       </td>
+                        <td>
+                        @Html.DisplayFor(modelItem => item.custo_tarefa)
+                        </td>
+                        <td>
+                        @Html.DisplayFor(modelItem => item.data_limite)
+                        </td>
+                    <td>
+                            <a asp-action="Edit" asp-route-id="@item.id_tarefa" class="btn btn-danger">Editar</a> |
+                            <a asp-action="Details" asp-route-id="@item.id_tarefa" class="btn btn-danger">Detalhar</a> |
+                            <a asp-action="Delete" asp-route-id="@item.id_tarefa" class="btn btn-danger">Deletar</a>
+
+                    </td>
+                </tr>
+                }
+}
+     
+    </tbody>
+
+
+        <tfoot>
+              <a asp-action="Create" class="btn btn-danger">Inserir</a>
+        </tfoot>
+</table>
+
+ <script>
+       $(document).ready(function(){
+    $(".up,.down").click(function(){
+        var row = $(this).parents("tr:first");
+        if ($(this).is(".up")) {
+            row.insertBefore(row.prev());
+        } else {
+            row.insertAfter(row.next());
+        }
+    });
+});
+    </script>
+

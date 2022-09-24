@@ -1,0 +1,50 @@
+﻿@model programa_consultorio.Models.Tarefas
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Edit</h1>
+
+<h4>Tarefas</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="id_tarefa" />
+            <div class="form-group">
+                <label asp-for="nome_tarefa" class="control-label"></label>
+                <input asp-for="nome_tarefa" class="form-control" />
+                <span asp-validation-for="nome_tarefa" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="custo_tarefa" class="control-label"></label>
+                <input asp-for="custo_tarefa" class="form-control" />
+                <span asp-validation-for="custo_tarefa" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="data_limite" class="control-label"></label>
+                <input asp-for="data_limite" class="form-control" />
+                <span asp-validation-for="data_limite" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ordem_apres" class="control-label"></label>
+                <input asp-for="ordem_apres" class="form-control" />
+                <span asp-validation-for="ordem_apres" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
